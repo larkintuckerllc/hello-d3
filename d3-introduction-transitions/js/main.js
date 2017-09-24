@@ -34,10 +34,10 @@ function update() {
     .on("click", function(e, i){
       dataset.splice(i, 1);
       update();
-    });
-
-    // ADDED TRANSITION
-    selection.transition().style('background-color', 'red').duration(2000);
+    })
+    .transition()
+    .style('background-color', 'red')
+    .duration(2000);
 
     // Exit selection: Remove elements without data from the DOM
     selection.exit().remove();
