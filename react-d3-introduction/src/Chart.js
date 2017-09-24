@@ -5,6 +5,10 @@ import 'd3-transition';
 import { MAX_HEIGHT } from './strings';
 
 class Chart extends Component {
+  constructor(props) {
+    super(props);
+    this.update = this.update.bind(this);
+  }
   componentDidMount() {
     const { dataset } = this.props;
     this.update(dataset);
@@ -16,8 +20,7 @@ class Chart extends Component {
     return false;
   }
   update(dataset) {
-    window.console.log('UPDATE');
-    window.console.log(dataset);
+    const { onClick } = this.props;
     const selection = select("#chart")
       .selectAll(".bar").data(dataset)
       .style("height", function(d){
@@ -35,8 +38,8 @@ class Chart extends Component {
       .style("margin-top", function(d){
         return `${(MAX_HEIGHT - d).toString()}px`;
       })
-      .on("click", function(e, i){
-        window.console.log(i);
+      .on("click", function(_, i) {
+        onClick(i);
       })
       .transition()
       .style('background-color', 'red')
@@ -44,10 +47,8 @@ class Chart extends Component {
     selection.exit().remove();
   }
   render() {
-    window.console.log('RENDER');
     return (
-      <div id="chart">
-      </div>
+      <div id="chart" />
     );
   }
 }
