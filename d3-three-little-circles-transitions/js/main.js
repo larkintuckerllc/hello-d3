@@ -11,7 +11,8 @@ domReady(function() {
     .attr('class', 'circle')
     .attr('cy', 60)
     .attr('cx', function(d, i) { return i * 100 + 30; })
-    .attr('r', function(d) { return Math.sqrt(d); });
-  // ADDED TRANSITION
-  selection.transition().attr('r', function(d) { return (2 * Math.sqrt(d)); }).duration(2000);
+    .attr('r', function(d) { return Math.sqrt(d); })
+    .transition()
+    .attr('r', function(d) { return (2 * Math.sqrt(d)); })
+    .duration(2000);
 });
